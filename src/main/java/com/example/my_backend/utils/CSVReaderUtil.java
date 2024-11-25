@@ -1,17 +1,21 @@
 package com.example.my_backend.utils;
 
-import com.example.my_backend.model.House;
+
+import com.example.my_backend.model.*;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CSVReaderUtil {
 
-    public static List<House> loadHouses(String fileName) {
+    public static Housing loadHouses(String fileName) {
         List<House> houses = new ArrayList<>();
+        Housing USA_Housing = new Housing();
         try {
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(new ClassPathResource(fileName).getInputStream())
@@ -40,11 +44,37 @@ public class CSVReaderUtil {
                         city, state, zipCode, houseSize, prevSoldDate
                 );
                 houses.add(house);
+            }   
+
+            for(House house : houses) {
+
+                String stateName = house.getState();
+                String cityName = house.getCity();
+                String zipcode = house.getZipCode();
+                
+                if(!USA_Housing.getStates().containsKey(stateName)) {
+                    USA_Housing.add(stateName);
+                }
+
+                State state = USA_Housing.getStates().get(stateName);
+                if(!state.getCities().containsKey(cityName)) {
+                    state.add(cityName);
+                }
+
+                City city = state.getCities().get(cityName);
+                if(!city.getZipcodes().containsKey(zipcode)) {
+                    city.add(zipcode);
+                }
+
+                ZIP zip = city.getZipcodes().get(zipcode);
+                zip.add(house);
             }
+            
+
         } catch (Exception e) {
             System.err.println("Error reading CSV file: " + e.getMessage());
             e.printStackTrace();
         }
-        return houses;
+        return USA_Housing;
     }
 }
