@@ -13,5 +13,5 @@ This should create a target directory containing our compiled main jar.
 To run this jar file, enter the command
 
 ```bash
-java -jar target/backend-0.0.1-SNAPSHOT.jar
+java -jar target/my-backend-0.0.1-SNAPSHOT.jar
 ```
