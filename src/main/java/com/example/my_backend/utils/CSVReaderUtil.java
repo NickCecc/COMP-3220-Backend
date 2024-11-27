@@ -12,7 +12,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class CSVReaderUtil {
-
+    /**
+     *
+     * @param fileName
+     * @return
+     */
     public static Housing loadHouses(String fileName) {
         List<House> houses = new ArrayList<>();
         Housing USA_Housing = new Housing();

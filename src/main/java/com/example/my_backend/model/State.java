@@ -1,4 +1,5 @@
 package com.example.my_backend.model;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -21,7 +22,7 @@ public class State {
 
     public List<House> getHouses() {
         List<House> houses = new ArrayList<House>();
-        for(City city : cities.values()) {
+        for (City city : cities.values()) {
             houses.addAll(city.getHouses());
         }
 

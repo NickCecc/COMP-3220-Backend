@@ -1,4 +1,5 @@
 package com.example.my_backend.model;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
@@ -23,16 +24,16 @@ public class Housing {
 
     public List<House> filter(String city, Double minPrice, Double maxPrice, Integer minBed) {
         return this.getHouses().stream()
-            .filter(h -> (city == null || h.getCity().equalsIgnoreCase(city)))
-            .filter(h -> (minPrice == null || h.getPrice() >= minPrice))
-            .filter(h -> (maxPrice == null || h.getPrice() <= maxPrice))
-            .filter(h -> (minBed == null || h.getBed() >= minBed))
-            .toList();
+                .filter(h -> (city == null || h.getCity().equalsIgnoreCase(city)))
+                .filter(h -> (minPrice == null || h.getPrice() >= minPrice))
+                .filter(h -> (maxPrice == null || h.getPrice() <= maxPrice))
+                .filter(h -> (minBed == null || h.getBed() >= minBed))
+                .toList();
     }
 
     private List<House> getHouses() {
         List<House> houses = new ArrayList<House>();
-        for(State state : states.values()) {
+        for (State state : states.values()) {
             houses.addAll(state.getHouses());
         }
 
