@@ -5,10 +5,18 @@ import java.util.Set;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Represents a ZIP code area containing a set of houses.
+ */
 public class ZIP {
     private Set<House> houses;
     private String zipcode;
 
+    /**
+     * Constructs a ZIP object with the specified ZIP code.
+     *
+     * @param zipcode the ZIP code associated with this object
+     */
     public ZIP(String zipcode) {
         this.zipcode = zipcode;
 
@@ -16,14 +24,18 @@ public class ZIP {
     }
 
     /**
-     * @param newhouse
+     * Adds a new house to the set of houses in this ZIP code.
+     *
+     * @param newhouse the {@link House} object to be added
      */
     public void add(House newhouse) {
         houses.add(newhouse);
     }
 
     /**
-     * @return
+     * Retrieves all houses in this ZIP code as a list.
+     *
+     * @return a {@link List} of {@link House} objects in this ZIP code
      */
     public List<House> getHouses() {
         List<House> housesList = new ArrayList<House>();

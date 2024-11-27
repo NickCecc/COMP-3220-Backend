@@ -8,14 +8,19 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.HashSet;
-import java.util.Set;
+/**
+ * Utility class for reading housing data from a CSV file and populating a structure.
+ */
 
 public class CSVReaderUtil {
     /**
+     * Reads a CSV file and populates the housing structure.
      *
-     * @param fileName
-     * @return
+     * The method reads a CSV file line by line and creates House objects. It then organizes these
+     * objects into a structure of `Housing`, `State`, `City`, and `ZIP` instances.
+     *
+     * @param fileName the name of the CSV file located in the classpath
+     * @return a {@link Housing} object containing a structure of the housing data
      */
     public static Housing loadHouses(String fileName) {
         List<House> houses = new ArrayList<>();
@@ -48,32 +53,32 @@ public class CSVReaderUtil {
                         city, state, zipCode, houseSize, prevSoldDate
                 );
                 houses.add(house);
-            }   
+            }
 
-            for(House house : houses) {
+            for (House house : houses) {
 
                 String stateName = house.getState();
                 String cityName = house.getCity();
                 String zipcode = house.getZipCode();
-                
-                if(!USA_Housing.getStates().containsKey(stateName)) {
+
+                if (!USA_Housing.getStates().containsKey(stateName)) {
                     USA_Housing.add(stateName);
                 }
 
                 State state = USA_Housing.getStates().get(stateName);
-                if(!state.getCities().containsKey(cityName)) {
+                if (!state.getCities().containsKey(cityName)) {
                     state.add(cityName);
                 }
 
                 City city = state.getCities().get(cityName);
-                if(!city.getZipcodes().containsKey(zipcode)) {
+                if (!city.getZipcodes().containsKey(zipcode)) {
                     city.add(zipcode);
                 }
 
                 ZIP zip = city.getZipcodes().get(zipcode);
                 zip.add(house);
             }
-            
+
 
         } catch (Exception e) {
             System.err.println("Error reading CSV file: " + e.getMessage());
